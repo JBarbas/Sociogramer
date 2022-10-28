@@ -83,6 +83,7 @@ html, body {
 .menuBtn {
     border: 0px;
     background-color: turquoise;
+    color: white;
     margin: 10px !important;
     padding: 5px !important;
     padding-left: 15px !important;
