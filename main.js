@@ -16,6 +16,7 @@ var nodeSize = 20;
 var selectedNode = null;
 var dragNode = null;
 var editNode = null;
+var mostSelectedNode = null;
 var mouseX;
 var mouseY;
 //////////// GLOBAL VARIABLES /////////////////
@@ -145,10 +146,14 @@ function UpdateSelects() {
 
 function DrawNodes() {
     for (var i = 0; i < levels.length; i++) levels[i].nPos = 0;
+    mostSelectedNode = null;
     for (var i = 0; i < nodes.length; i++) {
         let n = nodes[i];
         n.radius = maxRadius - (n.selects * (maxRadius - minRadius) / maxSelects);
-        if (n.selects == maxSelects && n.level.nodes.length == 1) n.radius = 0;
+        if (n.selects == maxSelects && n.level.nodes.length == 1) {
+            n.radius = 0;
+            mostSelectedNode = n;
+        } 
         n.angle = n.level.nPos * 360 / n.level.nodes.length;
         n.level.nPos++
         DrawNode(n);
@@ -323,7 +328,7 @@ function handleMouseMove(e) {
 }
 
 function handleMouseDown() {
-    if (selectedNode != null) {
+    if (selectedNode != null && selectedNode != mostSelectedNode) {
         dragNode = selectedNode;
         myGameArea.canvas.style.cursor = "move";
     }
