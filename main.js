@@ -32,7 +32,7 @@ var myGameArea = {
     canvas: document.createElement("canvas"),
     start: function () {
         this.canvas.onmousemove = function (e) { handleMouseMove(e); };
-        this.canvas.addEventListener('click', function(e) { onCanvasClick(e)}, false);
+        this.canvas.addEventListener('click', function (e) { onCanvasClick(e) }, false);
         this.canvas.onmousedown = function (e) { handleMouseDown(e); };
         this.canvas.onmouseup = function (e) { handleMouseUp(e); };
         this.canvas.width = window.innerWidth;
@@ -67,9 +67,9 @@ function updateGameArea() {
     if (myGameArea.frameNo == 1 || everyinterval(150)) {
 
     }
-    
-    for (var i = 0; i < nCircles; i++){
-        DrawCircle(minRadius + ((i) * (maxRadius-minRadius) / (nCircles-1)));
+
+    for (var i = 0; i < nCircles; i++) {
+        DrawCircle(minRadius + ((i) * (maxRadius - minRadius) / (nCircles - 1)));
     }
 
     UpdateSelects();
@@ -159,7 +159,7 @@ function DrawNodes() {
         if (n.selects == maxSelects && n.level.nodes.length == 1) {
             n.radius = 0;
             mostSelectedNode = n;
-        } 
+        }
         n.angle = n.level.nPos * 360 / n.level.nodes.length;
         n.level.nPos++
         DrawNode(n);
@@ -187,9 +187,9 @@ function MoveNode(node) {
     let dx = mouseX - centerX;
     let dy = mouseY - centerY;
     let mag = Math.sqrt(dx * dx + dy * dy);
-    dx = node.radius * dx/mag;
-    dy = node.radius * dy/mag;
-    node.forcedAngle = (dy < 0 ? -1 : 1) * Math.acos(dx/node.radius) / (Math.PI/180);
+    dx = node.radius * dx / mag;
+    dy = node.radius * dy / mag;
+    node.forcedAngle = (dy < 0 ? -1 : 1) * Math.acos(dx / node.radius) / (Math.PI / 180);
 }
 
 function DrawArrows() {
@@ -240,6 +240,22 @@ function ResetNode() {
     if (editNode != null) {
         document.getElementById("nodeAngle").value = editNode.angle;
         editNode.forcedAngle = null;
+    }
+}
+
+function RemoveNode() {
+    if (editNode != null) {
+        index = nodes.indexOf(editNode);
+        if (index > -1) {
+            nodes.splice(index, 1);
+        }
+        for (var i = 0; i < nodes.length; i++) {
+            let n = nodes[i];
+            index = n.selectsTo.indexOf(editNode.id);
+            if (index > -1) {
+                n.selectsTo.splice(index, 1);
+            }
+        }
     }
 }
 
@@ -322,7 +338,7 @@ function handleMouseMove(e) {
         var isPointer = false;
         for (var i = 0; i < nodes.length; i++) {
             let n = nodes[i];
-            if (mouseX > n.posX - nodeSize/2 && mouseX < n.posX + nodeSize/2 && mouseY > n.posY - nodeSize/2 && mouseY < n.posY + nodeSize/2) {
+            if (mouseX > n.posX - nodeSize / 2 && mouseX < n.posX + nodeSize / 2 && mouseY > n.posY - nodeSize / 2 && mouseY < n.posY + nodeSize / 2) {
                 isPointer = true;
                 selectedNode = n;
                 break;
