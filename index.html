@@ -22,51 +22,67 @@
         crossorigin="anonymous"></script>
     <br>
 
-    <img src="assets/img/logo.png" id="logo"/>
+    <img src="assets/img/logo.png" id="logo" />
 
     <div class="vstack" id="menu">
         <button class="btnHide" id="menuHideButton" onclick="ToggleHideReveal()"><i
                 class="bi bi-chevron-compact-down"></i></button>
         <div class="row" id="menu_content">
-            <div class="col-md-4">
-                <p>Nuevo registro:</p>
-                <label for="rId">Identificador:</label>
-                <input type="text" id="rId" name="rId"><br>
-                <label for="rSelect">Elecciones:</label>
-                <input type="text" id="rSelect" name="rSelect"><br>
-                <div class="row btnDiv" style="justify-content: center;">
-                    <button class="menuBtn col-md-4" onclick="AddRegister()">Crear registro</button>
+            <div class="col-md-4 vstack gap-1">
+                <div>
+                    <p>Nuevo registro:</p>
+                    <label for="rId">Identificador:</label>
+                    <input type="text" id="rId" name="rId"><br>
+                    <label for="rSelect">Elecciones:</label>
+                    <input type="text" id="rSelect" name="rSelect"><br>
+                    <div class="row btnDiv" style="justify-content: center;">
+                        <button class="menuBtn col-md-4" onclick="AddRegister()">Crear registro</button>
+                    </div>
+                </div>
+                <div>
+                    <p id="nodeOptions">Opciones de nodo:</p>
+                    <label for="nodeAngle">Ángulo:</label>
+                    <input type="text" id="nodeAngle" name="nodeAngle"><br>
+                    <label for="nodeSelects">Elecciones:</label>
+                    <input type="text" id="nodeSelects" name="nodeSelects"><br>
+                    <div class="row btnDiv" style="justify-content: center;">
+                        <button class="menuBtn col-md-4" onclick="UpdateNode()">Actualizar</button>
+                        <button class="menuBtn col-md-4" onclick="ResetNode()">Restaurar</button>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <p id="nodeOptions">Opciones de nodo:</p>
-                <label for="nodeAngle">Ángulo:</label>
-                <input type="text" id="nodeAngle" name="nodeAngle"><br>
-                <label for="nodeSelects">Elecciones:</label>
-                <input type="text" id="nodeSelects" name="nodeSelects"><br>
-                <div class="row btnDiv" style="justify-content: center;">
-                    <button class="menuBtn col-md-4" onclick="UpdateNode()">Actualizar</button>
-                    <button class="menuBtn col-md-4" onclick="ResetNode()">Restaurar</button>
-                </div>
-            </div>
-            <div class="col-md-4" style="justify-content: center;">
+            <div class="col-md-8 vstack gap-1" style="justify-content: center;">                
                 <p>Opciones del sociograma:</p>
-                <label for="maxRadius">Radio máximo:</label>
-                <input type="text" id="maxRadius" name="maxRadius" value="150"><br>
-                <label for="minRadius">Radio mínimo:</label>
-                <input type="text" id="minRadius" name="minRadius" value="50"><br>
-                <label for="nCircles">Número de circunferencias:</label>
-                <input type="text" id="nCircles" name="nCircles" value="3"><br>
-                <label for="nodeSize">Tamaño de nodo:</label>
-                <input type="text" id="nodeSize" name="nodeSize" value="20"><br>
-                <label for="nodeBG">Color de fondo de nodo:</label>
-                <input type="color" id="nodeBG" name="nodeBG" value="#000000" style="cursor: pointer;"><br>
-                <label for="nodeColor">Color de texto de nodo:</label>
-                <input type="color" id="nodeColor" name="nodeColor" value="#ffffff" style="cursor: pointer;"><br>
-                <label for="arrowColor">Color de flechas:</label>
-                <input type="color" id="arrowColor" name="arrowColor" value="#000000" style="cursor: pointer;"><br>
-                <label for="circlesColor">Color de circunferencias:</label>
-                <input type="color" id="circlesColor" name="circlesColor" value="#000000" style="cursor: pointer;"><br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="maxRadius">Radio máximo:</label>
+                        <input type="text" id="maxRadius" name="maxRadius" value="150"><br>
+                        <label for="minRadius">Radio mínimo:</label>
+                        <input type="text" id="minRadius" name="minRadius" value="50"><br>
+                        <label for="nCircles">Número de circunferencias:</label>
+                        <input type="text" id="nCircles" name="nCircles" value="3"><br>
+                        <label for="nodeSize">Tamaño de nodo:</label>
+                        <input type="text" id="nodeSize" name="nodeSize" value="20"><br>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="nodeBG">Color de fondo de nodo:</label>
+                        <input type="color" id="nodeBG" name="nodeBG" value="#000000" style="cursor: pointer;"><br>
+                        <label for="nodeColor">Color de texto de nodo:</label>
+                        <input type="color" id="nodeColor" name="nodeColor" value="#ffffff" style="cursor: pointer;"><br>
+                        <label for="arrowColor">Color de flechas:</label>
+                        <input type="color" id="arrowColor" name="arrowColor" value="#000000" style="cursor: pointer;"><br>
+                        <label for="circlesColor">Color de circunferencias:</label>
+                        <input type="color" id="circlesColor" name="circlesColor" value="#000000" style="cursor: pointer;"><br>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="arrowsOn">Flechas visibles:</label>
+                        <input type="checkbox" id="arrowsOn" name="arrowsOn" checked style="cursor: pointer;"><br>
+                        <label for="fontSize">Tamaño de fuente:</label>
+                        <input type="number" id="fontSize" name="fontSize" value="15" style="cursor: pointer;"><br>
+                        <!-- <label for="fontFamily">Fuente:</label>
+                        <input type="text" id="fontFamily" name="fontFamily" value="Arial" style="cursor: pointer;"><br> -->
+                    </div>
+                </div>
                 <div class="row btnDiv" style="justify-content: center;">
                     <button class="menuBtn col-md-4" onclick="UpdateChart()">Actualizar</button>
                     <button class="menuBtn col-md-4" onclick="ResetChart()">Restaurar</button>

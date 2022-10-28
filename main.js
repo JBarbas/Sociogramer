@@ -8,6 +8,8 @@ var nodeBG = "#000000";
 var nodeColor = "#ffffff";
 var arrowColor = "#000000";
 var circlesColor = "#000000";
+var fontSize = 15;
+var arrowsOn = true;
 var nodes = [];
 var levels = [];
 var maxSelects;
@@ -76,7 +78,7 @@ function updateGameArea() {
     if (dragNode != null) MoveNode(dragNode);
 
     DrawNodes();
-    DrawArrows();
+    if (arrowsOn) DrawArrows();
 }
 
 function everyinterval(n) {
@@ -173,7 +175,7 @@ function DrawNode(node) {
     node.posY = Math.sin(angle * Math.PI / 180) * node.radius + centerY;
     ctx.fillStyle = nodeBG;
     ctx.fillRect(node.posX - nodeSize / 2, node.posY - nodeSize / 2, nodeSize, nodeSize);
-    ctx.font = "15px Arial";
+    ctx.font = fontSize + "px Arial";
     ctx.fillStyle = nodeColor;
     ctx.textAlign = "center";
     ctx.fillText(node.id, node.posX, node.posY + 5);
@@ -249,6 +251,8 @@ function UpdateChart() {
     nodeColor = document.getElementById("nodeColor").value;
     arrowColor = document.getElementById("arrowColor").value;
     circlesColor = document.getElementById("circlesColor").value;
+    fontSize = document.getElementById("fontSize").value;
+    arrowsOn = document.getElementById("arrowsOn").checked;
 }
 
 function ResetChart() {
