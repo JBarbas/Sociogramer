@@ -33,8 +33,8 @@ var myGameArea = {
         this.canvas.addEventListener('click', function(e) { onCanvasClick(e)}, false);
         this.canvas.onmousedown = function (e) { handleMouseDown(e); };
         this.canvas.onmouseup = function (e) { handleMouseUp(e); };
-        this.canvas.width = window.innerWidth; //document.width is obsolete
-        this.canvas.height = window.innerHeight;; //document.height is obsolete
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
@@ -50,10 +50,14 @@ function reOffset() {
     offsetX = BB.left;
     offsetY = BB.top;
 }
+function reSize() {
+    myGameArea.canvas.width = window.innerWidth;
+    myGameArea.canvas.height = window.innerHeight;
+}
 var offsetX, offsetY;
 reOffset();
-window.onscroll = function (e) { reOffset(); }
-window.onresize = function (e) { reOffset(); }
+window.onscroll = function (e) { reSize(); reOffset(); }
+window.onresize = function (e) { reSize(); reOffset(); }
 
 function updateGameArea() {
     myGameArea.clear();
