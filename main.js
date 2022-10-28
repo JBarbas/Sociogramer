@@ -232,6 +232,7 @@ function UpdateNode() {
                 }
             }
         }
+        else editNode.selectsTo = [];
     }
 }
 
