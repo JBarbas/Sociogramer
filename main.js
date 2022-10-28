@@ -87,7 +87,7 @@ function AddRegister() {
         node = new Node(id, 0, 0);
         nodes.push(node);
     }
-    let selects = document.getElementById("rSelect").value;
+    let selects = document.getElementById("rSelect").value.replace(/\s/g, '');
     if (selects.length > 0) {
         selects = selects.split(",");
         for (var i = 0; i < selects.length; i++) {
@@ -215,7 +215,7 @@ function UpdateNode() {
         let angle = document.getElementById("nodeAngle").value;
         angle = Number(angle);
         if (editNode.angle != angle) editNode.forcedAngle = angle;
-        let selects = document.getElementById("nodeSelects").value;
+        let selects = document.getElementById("nodeSelects").value.replace(/\s/g, '');
         if (selects.length > 0) {
             editNode.selectsTo = selects.split(",");
             for (var i = 0; i < editNode.selectsTo.length; i++) {
@@ -356,9 +356,13 @@ function ToggleHideReveal() {
     if (menu.style.display == "none") {
         menu.style.display = "flex";
         document.getElementById("menuHideButton").innerHTML = "<i class='bi bi-chevron-compact-down'></i>";
+        document.getElementById("menuHideButton").classList.add("btnHide");
+        document.getElementById("menuHideButton").classList.remove("btnHideCollapsed");
     }
     else {
         menu.style.display = "none";
         document.getElementById("menuHideButton").innerHTML = "<i class='bi bi-chevron-compact-up'></i>";
+        document.getElementById("menuHideButton").classList.remove("btnHide");
+        document.getElementById("menuHideButton").classList.add("btnHideCollapsed");
     }
 }
