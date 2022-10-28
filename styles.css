@@ -1,0 +1,62 @@
+canvas {
+    border: 1px solid #ffffff;
+    background-color: #f1f1f1;
+    position: absolute;
+    z-index: 0;
+}
+
+#menu {
+    background-color: rgba(255, 255, 255, 0);
+    position: absolute;
+    z-index: 1000;
+    padding: 15px;
+    margin: auto;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+}
+
+#menu_content {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 15px;
+}
+
+#menu_content * {
+    margin-bottom: 10px;
+}
+
+p {
+    font-weight: bold;
+    margin-bottom: 20px !important;
+}
+
+.btnHide {
+    width: 40px;
+    height: 40px;
+    border: 0px;
+    background-color: rgba(255, 255, 255, 0.7);
+    color: black;
+}
+
+.btnHide :hover {
+    color: turquoise;
+}
+
+html, body {
+    overflow: hidden;
+}
+
+.menuBtn {
+    border: 0px;
+    background-color: turquoise;
+    margin: 10px !important;
+    padding: 5px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    border-radius: 30px !important;
+}
+
+.menuBtn:hover {
+    background-color: #303030 !important;
+    color: turquoise !important;
+}

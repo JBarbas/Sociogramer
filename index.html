@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<body onload="startGame()">
+    <script src="main.js"></script>
+    <script src="models/node.js"></script>
+    <script src="models/level.js"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <br>
+
+    <div class="vstack" id="menu">
+        <button class="btnHide" id="menuHideButton" onclick="ToggleHideReveal()"><i class="bi bi-chevron-compact-down"></i></button>
+        <div class="row" id="menu_content">
+            <div class="col-md-4">
+                <p>Nuevo registro:</p>
+                <label for="rId">Identificador:</label>
+                <input type="text" id="rId" name="rId"><br>
+                <label for="rSelect">Elecciones:</label>
+                <input type="text" id="rSelect" name="rSelect"><br>
+                <button class="menuBtn" onclick="AddRegister()">Crear registro</button>
+            </div>
+            <div class="col-md-4">
+                <p id="nodeOptions">Opciones de nodo:</p>
+                <label for="nodeAngle">Ángulo:</label>
+                <input type="text" id="nodeAngle" name="nodeAngle"><br>
+                <label for="nodeSelects">Elecciones:</label>
+                <input type="text" id="nodeSelects" name="nodeSelects"><br>
+                <button class="menuBtn" onclick="UpdateNode()">Actualizar nodo</button>
+                <button class="menuBtn" onclick="ResetNode()">Restaurar nodo</button>
+            </div>
+            <div class="col-md-4">
+                <p>Opciones del sociograma:</p>
+                <label for="maxRadius">Radio máximo:</label>
+                <input type="text" id="maxRadius" name="maxRadius" value="150"><br>
+                <label for="minRadius">Radio mínimo:</label>
+                <input type="text" id="minRadius" name="minRadius" value="50"><br>
+                <label for="nCircles">Número de circunferencias:</label>
+                <input type="text" id="nCircles" name="nCircles" value="3"><br>
+                <label for="nodeSize">Tamaño de nodo:</label>
+                <input type="text" id="nodeSize" name="nodeSize" value="20"><br>
+                <label for="nodeBG">Color de fondo de nodo:</label>
+                <input type="color" id="nodeBG" name="nodeBG" value="#000000"><br>
+                <label for="nodeColor">Color de texto de nodo:</label>
+                <input type="color" id="nodeColor" name="nodeColor" value="#ffffff"><br>
+                <label for="arrowColor">Color de flechas:</label>
+                <input type="color" id="arrowColor" name="arrowColor" value="#000000"><br>
+                <label for="circlesColor">Color de circunferencias:</label>
+                <input type="color" id="circlesColor" name="circlesColor" value="#000000"><br>
+                <button class="menuBtn" onclick="UpdateChart()">Actualizar sociograma</button>
+                <button class="menuBtn" onclick="ResetChart()">Restaurar sociograma</button>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
