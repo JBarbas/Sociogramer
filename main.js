@@ -10,17 +10,19 @@ var arrowColor = "#000000";
 var circlesColor = "#000000";
 var fontSize = 15;
 var arrowsOn = true;
+var nodeSize = 20;
 var nodes = [];
 var levels = [];
 var maxSelects;
 var minSelects;
-var nodeSize = 20;
 var selectedNode = null;
 var dragNode = null;
 var editNode = null;
 var mostSelectedNode = null;
 var mouseX;
 var mouseY;
+var uploadedFile = null;
+var uploadedFileInterval = null;
 //////////// GLOBAL VARIABLES /////////////////
 ///////////////////////////////////////////////
 
@@ -119,7 +121,7 @@ function DrawCircle(radius) {
 }
 
 function UpdateLevels() {
-    for (var i = 0; i < levels.length; i++) levels[i].nodes = [];
+    for (var i = 0; i < levels.length; i++) levels[i].levelNodes = [];
     maxSelects = 0;
     minSelects = Infinity;
     for (var i = 0; i < nodes.length; i++) {
@@ -128,7 +130,7 @@ function UpdateLevels() {
             level = new Level(nodes[i].selects);
             levels.push(level);
         }
-        level.nodes.push(nodes[i]);
+        level.levelNodes.push(nodes[i].id);
         nodes[i].level = level;
         if (nodes[i].selects > maxSelects) maxSelects = nodes[i].selects;
         if (nodes[i].selects < minSelects) minSelects = nodes[i].selects;
@@ -156,11 +158,11 @@ function DrawNodes() {
     for (var i = 0; i < nodes.length; i++) {
         let n = nodes[i];
         n.radius = maxRadius - (n.selects * (maxRadius - minRadius) / maxSelects);
-        if (n.selects == maxSelects && n.level.nodes.length == 1) {
+        if (n.selects == maxSelects && n.level.levelNodes.length == 1) {
             n.radius = 0;
             mostSelectedNode = n;
         }
-        n.angle = n.level.nPos * 360 / n.level.nodes.length;
+        n.angle = n.level.nPos * 360 / n.level.levelNodes.length;
         n.level.nPos++
         DrawNode(n);
     }
@@ -390,4 +392,81 @@ function ToggleHideReveal() {
         document.getElementById("menuHideButton").classList.remove("btnHide");
         document.getElementById("menuHideButton").classList.add("btnHideCollapsed");
     }
+}
+
+function DownloadProject() {
+    const sgm = {
+        nodes: nodes,
+        levels: levels,
+        maxRadius: maxRadius,
+        minRadius: minRadius,
+        nCircles: nCircles,
+        nodeBG: nodeBG,
+        nodeColor: nodeColor,
+        arrowColor: arrowColor,
+        circlesColor: circlesColor,
+        fontSize: fontSize,
+        arrowsOn: arrowsOn,
+        nodeSize: nodeSize
+    }
+    download("sociograma.sgm",JSON.stringify(sgm));
+}
+
+function UploadProject() {
+    var element = document.createElement('input');
+    element.setAttribute("type", "file");
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();   
+
+    document.body.removeChild(element);
+    uploadedFile = element;
+    uploadedFileInterval = setInterval(WaitForUploadedFile, 100);
+}
+
+function WaitForUploadedFile() {
+    if (uploadedFile == null) return;
+    else if (uploadedFile.files.length == 0) return;
+    else {
+        let f = uploadedFile.files[0];
+    
+        let reader = new FileReader();
+
+        // Closure to capture the file information.
+        reader.onload = (function(theFile) {
+            return function(e) {                
+                const sgm = JSON.parse(e.target.result);
+                nodes = sgm.nodes;
+                levels = sgm.levels;
+                maxRadius = sgm.maxRadius;
+                minRadius = sgm.minRadius;
+                nCircles = sgm.nCircles;
+                nodeBG = sgm.nodeBG;
+                nodeColor = sgm.nodeColor;
+                arrowColor = sgm.arrowColor;
+                circlesColor = sgm.circlesColor;
+                fontSize = sgm.fontSize;
+                arrowsOn = sgm.arrowsOn;
+                nodeSize = sgm.nodeSize;
+            };
+        })(f);
+        reader.readAsText(f);
+        
+        clearInterval(uploadedFileInterval);
+    }
+}
+
+function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
 }
